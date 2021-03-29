@@ -105,12 +105,8 @@ class TcpAttack:
 
                 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        sys.exit('''Usage: 'port_scan.py  host  start_port  end_port' '''
-                 '''\nwhere \n host is the symbolic hostname or the IP address '''
-                 '''\nof the machine whose ports you want to scan, start_port is '''
-                 '''\nstart_port is the starting port number and end_port is the '''
-                 '''\nending port number''')
+    #if len(sys.argv) != 4:
+    #    sys.exit("Usage: 'port_scan.py  host  start_port  end_port where \n host is the symbolic hostname or the IP address nof the machine whose ports you want to scan, start_port is start_port is the starting port number and end_port is the \nending port number")
 
     verbosity = 0;  # set it to 1 if you want to see the result for each   #(1)
     # port separately as the scan is taking place
@@ -119,7 +115,7 @@ if __name__ == '__main__':
     spoofIP = '10.1.1.1'; targetIP = '10.1.1.2'  # Will contain actual IP addresses in real
     rangeStart = 0
     rangeEnd = 1
-    port = <int>
+    port = 10
     Tcp = TcpAttack(spoofIP, targetIP)
     Tcp.scanTarget(rangeStart, rangeEnd)
     if Tcp.attackTarget(port, 10): print('port was open to attack')
