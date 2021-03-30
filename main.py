@@ -22,14 +22,14 @@ class TcpAttack:
         start_port = rangeStart
         end_port =  rangeEnd  # (4)
 
-        open_ports = self.open_ports   ###########################################
+        #open_ports = self.open_ports   ###########################################
         # Scan the ports in the specified range:
         for testport in range(start_port, end_port + 1):  # (6)
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # (7)
             sock.settimeout(0.1)  # (8)
             try:  # (9)
                 sock.connect((dst_host, testport))  # (10)
-                open_ports.append(testport)  # (11)
+                self.open_ports.append(testport)  # (11)
                 if verbosity: print
                 testport  # (12)
                 sys.stdout.write("%s" % testport)  # (13)
@@ -57,24 +57,24 @@ class TcpAttack:
             IN.close()  # (27)
 
         OUT = open("openports.txt", 'w')  # (28)
-        if not open_ports:  # (29)
+        if not self.open_ports:  # (29)
             print
             "\n\nNo open ports in the range specified\n"  # (30)
         else:
             print
             "\n\nThe open ports:\n\n";  # (31)
-            for k in range(0, len(open_ports)):  # (32)
+            for k in range(0, len(self.open_ports)):  # (32)
                 if len(service_ports) > 0:  # (33)
                     for portname in sorted(service_ports):  # (34)
-                        pattern = r'^' + str(open_ports[k]) + r'/'  # (35)
+                        pattern = r'^' + str(self.open_ports[k]) + r'/'  # (35)
                         if re.search(pattern, str(portname)):  # (36)
                             print
-                            "%d:    %s" % (open_ports[k], service_ports[portname])
+                            "%d:    %s" % (self.open_ports[k], service_ports[portname])
                             # (37)
                 else:
                     print
-                    open_ports[k]  # (38)
-                OUT.write("%s\n" % open_ports[k])  # (39)
+                    self.open_ports[k]  # (38)
+                OUT.write("%s\n" % self.open_ports[k])  # (39)
         OUT.close()
 
         # port: Integer designating the port that the attack will use
